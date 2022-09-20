@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+     <!-- add mocha css, to show results -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+  <!-- add mocha framework code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+  <script>
+    mocha.setup('bdd'); // minimal setup
+  </script>
+  <!-- add chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+  <script>
+    // chai has a lot of stuff, let's make assert global
+    let assert = chai.assert;
+  </script>
+
+</head>
+<body>
+
+  <div >Hello!! <p class="hi"></p></div>
+   
+    <p>hi</p>
+   <script>
+    function power(x,n){
+        let res = x ** n;
+        return res;
+    }
+   
+    function add(x,y){
+      let res=x+y;
+     document.querySelector('.hi').innerHTML=res;
+    }
+   add(2,3);
+   </script> 
+
+  <!-- the script with tests (describe, it...) -->
+  <script>
+    describe("testing", function(){
+        function maketest(x,n){
+           let expected=x**n;
+           it(`${x} in the power of ${n} equals ${expected}`, function(){
+            assert.equal(power(x,n), expected);
+        });
+        }
+
+        maketest(4,5);
+    });
+
+  </script>
+
+    <!-- the element with id="mocha" will contain test results -->
+  <div id="mocha"></div>
+
+  <!-- run tests! -->
+  <script>
+   mocha.run();
+  </script>
+</body>
+</html>
+

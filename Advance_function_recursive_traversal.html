@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<h3 style="text-align:center;">Object Traversal through Recursion</h3>
+<h4 style="text-align:center;" id="recursion"></h4>
+<script>
+
+    let software_house={
+     development: {
+        team_members:[{name:"sana", age:22},{name:"namra", age:23}],
+        team_lead:[{name:"sir Hamza", age:25},{name:"sir Mohsin", age:30 }]
+       },
+       testing:[{name : "rahema" , age:22},{name:"esha", age:22}]
+       
+    };
+ 
+    //sofware_house is a complex structure so we traverse all the branches and sum the ages together.
+    
+  
+    function sum_ages(dep){
+        if(Array.isArray(dep)){
+            return dep.reduce((sum,current)=>sum+current.age,0);
+        }
+        else{
+            let res=0;
+            //the values of software house will be team members and team lead
+            //then it would pass the isArray chcek and values will be added....
+            //we can say values are the sub_branch...
+            for(let values of Object.values(dep)){
+            res+=sum_ages(values);
+         }
+         return res;
+        }
+   
+    }
+    let res=sum_ages(software_house);
+    document.getElementById("recursion").innerHTML = "reult with recursion : "+res+"<br><br>";
+   
+    </script>
+     <h3 style="text-align:center;">Object Traversal through Loops</h3>
+     <p style="margin-left: 500px;" id="loops">Object Traversal through Loops</p>
+     <p style="margin-left: 500px;" id="loops2">Object Traversal through Loops</p>
+    <script>
+        
+    //without recursive method.......................................
+    let str='';
+   function sum_by_for(dep){
+        let sum=0;
+       
+        str+="Object= {<br> ";
+        
+        for(let values of Object.values(dep)){
+            
+            str+="<br>main: ";
+            if(Array.isArray(values)){
+                str+="{ <br>";
+                values.forEach(function(item,index,array){
+                  
+                    //adds tetsing array....
+                    str+="[ name : "+ item.name+ ", age : " + item.age+"],";
+                       sum+=item.age; 
+                });
+              
+                str+="<br>}<br><br>";
+            }else{
+                //further divide development into team members and team leads...
+                str+="{ <br>";
+                for(let sub of Object.values(values)){
+                    str+="sub : [";
+                if(Array.isArray(sub)){
+                sub.forEach(function(item,index,array){
+                    str+="{ name : "+ item.name+ ", age : " + item.age+"}";
+                    sum+=item.age;
+                });
+                }  
+                str+="]<br>";
+              }
+              str+="}<br><br>";
+            }
+            
+        }
+        str+="}<br>";
+        return sum;
+    }
+
+    
+
+   
+  let s=sum_by_for(software_house);
+  document.getElementById("loops").innerHTML = str;
+  document.getElementById("loops2").innerHTML="total sum without recursion : "+s;
+</script>
+<h3 style="text-align:center;">Linked List</h3>

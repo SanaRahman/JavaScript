@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<script>
+
+function print(question,...handlers){
+let answer=confirm(question);
+for(let h of handlers){
+    
+    if(h.lenght==0){
+        if(answer)h();
+    }
+    else h(answer);
+    
+   
+}
+}
+
+print("Are you statisfied with your work?",()=>alert("Congrats then!"),result=>alert(result));
+</script>

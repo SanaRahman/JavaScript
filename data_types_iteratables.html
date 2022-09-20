@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<script>
+
+//strings are itratable
+
+let str="Hello my name is Sana";
+for(let char of str){
+    console.log(char);
+}
+
+//difference in maps,objects and sets
+
+//we have key,value and entries form the three of them but.....
+
+let map=new Map();
+map.set('name',"sana");
+
+
+let set1=new Set();
+let i={name:"rahema"};
+let j={name:"esha"};
+set1.add(i);
+set1.add(j);
+
+let set = new Set(["oranges", "apples", "bananas"]);
+
+/*set element is itraterable so if we dont add a key value pair we use value and valueagain in foreach loop
+for (let value of set) alert(value);
+
+// the same with forEach:
+set.forEach((value, valueAgain, set) => {
+  alert(value);
+});*/
+
+let obj={
+    weight: "46kg",
+}
+
+
+for(let keys of map.keys()){
+  console.log(keys);//name
+}
+for(let values of map.values()){
+  console.log(values);//sana
+}
+for(let entries of map.entries()){
+  console.log(entries);//[name,sana]
+}
+
+
+for(let keys of set1.keys()){
+  console.log(keys);
+}
+for(let values of set1.values()){
+  console.log(values);
+}
+for(let entries of set1.entries()){
+  console.log(entries);
+}
+
+
+for(let keys of Object.keys(obj)){
+  console.log(keys);//name
+}
+for(let values of Object.values(obj)){
+  console.log(values);//sana
+}
+for(let entries of Object.entries(obj)){
+  console.log(entries);//[name,sana]
+}
+
+</script>

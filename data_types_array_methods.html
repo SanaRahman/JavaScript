@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<script>
+
+let student={
+    min_age: 18,
+    max_age: 23,
+    can_join(person){
+        return  person.age >=18 && person.age<=23;
+    }
+};
+
+let person=[
+    {name: "Sana",
+        age: 12},
+    {name: "Namra",
+        age :34},
+    {name: "Sharmeen", 
+        age :19},
+    {name: "Namra",
+        age :20},
+];
+
+//-----------------------for each------------------------//
+//show the output in 1 step function.
+person.forEach(function(item, index,array){
+    student.can_join(item) ? console.log(item.name+" got admission with age: "+ item.age):index;
+});
+
+//---------------------filter and for each--------------------------------//
+/* syntax   
+* arr.find(func, thisArg);
+*arr.filter(func, thisArg); */
+
+
+//we filter the can_join function for true and put them in admission array
+//a two step function.
+//filter works like find but it makes a new array of all the matched ouputs
+//unlike find whose answer is the first matched index
+
+//diffrent syntax for filter can be
+ let admission1=person.filter(student.can_join,student); // OR
+ let admission2=person.filter(function(item){ return student.can_join(item);}); // OR
+let admission=person.filter(item=>student.can_join(item));
+
+admission.forEach((item,index,array)=>{console.log(`accepted member as a student is ${item.name} 
+having age : ${item.age} her entry is at index : ${index}`)});
+
+//----------------------------find ------------------------------------//
+
+let found=person.find(item=>item.name=="Namra");
+console.log("The name : "+found.name+" was found with age : "+found.age);
+
+//--------------------findIndex/findLastIndex------------------//
+
+let f=person.findLastIndex(item=>item.name=="Namra");
+//it only gives the index from the bottom first search in array.
+console.log("The name: "+f.name+" was found at index :"+f);
+
+let sort=[0,-1,1];
+sort.sort();
+console.log(sort);//-1,0,1
+
+let sort1=[99,3,19,15,-25,3];
+console.log(sort1.sort());//answer is -25,15,3,3,99 because it sorts on the basis of -ve than 1 element 
+//that is 1 in 15 than 1 in 19 5 in 15 and so on.....
+
+//to sort an array we can use the logic of sort array that is -ve first 0 for equal and 1 for greater.
+
+sort1.sort((a,b)=> a-b );//a-b is -ve means a is less than b for a=b it is 0 and +ve it is a is greter than b.
+console.log(sort1);//answer -25,3,3,15,19,99
+
+//--------------------reduce---------------------//
+
+
+/*let value = arr.reduce(function(accumulator, item, index, array) {
+  ...
+}, [initial]);*/
+//sum is accumulator that stores all previous sum ,it is intialized by 0.
+//cuurent is the value of current index here.
+
+let reduced=sort1.reduce((sum,current)=>sum+=current,0);
+console.log(reduced);
+
+
+
+</script>
+

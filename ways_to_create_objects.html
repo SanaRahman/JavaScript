@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<script>
+    //-----------------------------------makeing object through literals
+    document.write("<br>-------------Printing an literal Object----------------  <br><br>");
+    let obj1={
+        name:"sana",
+        age:22 ,
+        hobbies:["badminton","gardening","cooking"],
+        greet:function(){
+            document.write("Hello <br>");
+        },
+        score:{
+            scad:80,
+            maths:94
+        }
+    };
+
+    document.write("name :"+obj1.name+"<br>");
+    for(let h of obj1.hobbies){
+        document.write("Hobby :"+ h+"<br>");
+    }
+    obj1.greet();
+    document.write("My maths score: "+obj1.score.maths+"<br>");
+    document.write("My scad score: "+obj1.score.scad+"<br>");
+
+
+     //--------------------------------making object through Object instance.
+     let obj2=new Object({
+        name:"sana",
+        age:22 ,
+        hobbies:["badminton","gardening","cooking"],
+        greet:function(){
+            document.write("Hello <br>");
+        },
+        score:{
+            scad:80,
+            maths:94
+        }
+     });
+     
+    document.write("<br><br>-------------Printing an object made by Object instance----------------  <br><br>");
+    document.write("name :"+obj2.name+"<br>");
+    for(let h of obj2.hobbies){
+        document.write("Hobby :"+ h+"<br>");
+    }
+    obj2.greet();
+    document.write("My maths score: "+obj2.score.maths+"<br>");
+    document.write("My scad score: "+obj2.score.scad+"<br>");
+
+    //--------------------------------makeing object through constructor function....
+
+    function make_obj(){
+        this.name="sana",
+        this.age=22 ,
+        this.hobbies=["badminton","gardening","cooking"],
+        this.greet=function(){
+            document.write("Hello <br>");
+        },
+        this.score={
+            scad:80,
+            maths:94
+        }
+    }
+    let obj3=new make_obj();
+    document.write("<br><br>-------------Printing an object made by constructor function---------------- <br><br>");
+    document.write("name :"+obj3.name+"<br>");
+    for(let h of obj3.hobbies){
+        document.write("Hobby :"+ h+"<br>");
+    }
+    obj3.greet();
+    document.write("My maths score: "+obj3.score.maths+"<br>");
+    document.write("My scad score: "+obj3.score.scad+"<br>");
+</script>

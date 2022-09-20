@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<style>
+    *{
+        text-align: center;
+    }
+</style>
+<h1 style="text-align:center">Transparent Caching</h1>
+<p id="msg"></p>
+<p id="ans"></p>
+<script>
+
+function calculate(x){
+    alert(`calculating ${x}`);
+    return x;
+}
+
+//we are passing calculate function in checking function......
+function cachingDecorator(func){
+    let map=new Map();
+
+    //its a wrapper 
+    return function(x){
+
+ if(map.has(x)){
+    document.write("taking value from cache <br>");
+   return map.get(x);
+ }
+ else{
+    //wrapper is around this function....
+    let res=func(x);
+
+    map.set(x,res);
+    return res;
+ }
+};
+}
+
+calculate=cachingDecorator(calculate);
+document.getElementById("ans").innerHTML=(calculate(2))+"<br>"+(calculate(3))
++"<br>"+(calculate(2))+"<br>"+(calculate(3));
+
+
+</script>
+<h1 style="text-align:center"><br> Transparent Caching using function of object and key with two arguments </h1>
+<p id="msg2"></p>
+<p id="ans2"></p>
+<script>
+let obj={
+    somemethod:function(){
+     //does somthing
+    },
+    power:function(x,n){
+        alert(`calculating powers for ${x} power ${n} `);
+        return x**n;
+    }
+};
+
+function storing(func){
+    let map=new Map();
+
+    //wrapper
+    return function(){
+        //pseduo array of its arguments is in arguments so make sure to use arguments...
+        let key= join(arguments); // 2,3 
+        if(map.has(key)){
+           return map.get(key);
+        }else{
+            //we use func.call this to call the power func from the two functions of object
+           //even if there is 1 func we must call an object function through func.call(this,..arguments).
+            let res=func.call(this,...arguments);
+          map.set(key,res);
+          return res;
+        }
+
+        function join(arguments){
+            // 2,3 as 2 power 3
+            //to store values against two varabiles we concat them
+            return arguments[0]+","+arguments[1];
+        }
+    }
+}
+
+obj.power=storing(obj.power);
+document.getElementById("ans2").innerHTML=(obj.power(2,3))+"<br>"+(obj.power(3,2))
++"<br>"+(obj.power(2,3))+"<br>"+(obj.power(3,2));
+
+</script>
+
+<h1 style="text-align:center"><br> Binding function with an object </h1>
+<p id="msg3"></p>
+<p id="ans3"></p>
+<script>
+
+let user={
+    name:"sana",
+    greet:function(){
+        alert("hello");
+    },
+    meet:function(){
+        alert("another function");
+    }
+};
+
+function show(phrase){
+    
+    document.getElementById("msg3").innerHTML="phrase "+this.name+"<br>";
+ 
+}
+//binding object variables...
+let function1=show.bind(user);
+//binding object methods...
+let f=user.greet.bind(user);
+
+setTimeout(f(),1000);
+setTimeout(function1("helo"),1000);
+
+/*user={
+greet:function(){
+    alert("hi");
+}
+}
+f();//still remains the same
+user.greet();//changes to hello..*/
+
+//for binding all the method of an object.....
+let arr=[];
+let i=0;
+for(let key in user){
+    
+    if(typeof user[key] =="function"){
+      arr[i]=user[key].bind(user);
+      i++;
+    }
+}
+
+arr.forEach(function(item,index,array){
+    setTimeout(item,1000);
+});
+
+
+
+</script>
